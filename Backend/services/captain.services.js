@@ -20,7 +20,6 @@ module.exports.createCaptain = async ({
             },
             email,
             password,
-
             vehicle:{
                 color,
                 plate,
