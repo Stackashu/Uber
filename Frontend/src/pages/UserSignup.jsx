@@ -1,28 +1,44 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useContext, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
+import { userDataContext } from "../context/UserContext";
 
 const UserSignup = () => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [userData, setUserData] = useState("")
+  const [userData, setUserData] = useState("");
 
-  const submitHandler = (e) => {
+  const navigate = useNavigate();
+
+  const { user, setUser } = useContext(userDataContext);
+
+  const submitHandler = async (e) => {
     e.preventDefault();
-    setUserData({
-      username:{
-        firstName: firstName,
-        lastName: lastName,
+    const newUser = {
+      fullname: {
+        firstname: firstName,
+        lastname: lastName,
       },
       email: email,
-      password: password
-    })
+      password: password,
+    };
+    const respone = await axios.post(
+      `${import.meta.env.VITE_BASE_URL}/users/register`,
+      newUser
+    );
+    if (respone.status === 201) {
+      const data = respone.data;
+      setUser(data.user);
+      localStorage.setItem('token',data.token);
+      navigate("/home");
+    }
     setEmail(" ");
     setPassword(" ");
     setFirstName(" ");
     setLastName(" ");
-  }
+  };
 
   return (
     <div className="p-7 h-screen flex flex-col justify-between">
@@ -75,7 +91,7 @@ const UserSignup = () => {
             placeholder="password"
           />
           <button className="bg-[#111] text-white font-semibold mt-7 rounded  px-4 py-2  w-full text-lg placeholder:text-base">
-            Login
+            Create Account
           </button>
           <p className="text-center">
             Already have an account?
@@ -87,7 +103,9 @@ const UserSignup = () => {
       </div>
       <div>
         <p className="text-[10px] text-center">
-          This site is protected by reCAPTCHA and the <span className="underline">Google Privacy Policy</span> and Terms of Service apply.
+          This site is protected by reCAPTCHA and the{" "}
+          <span className="underline">Google Privacy Policy</span> and Terms of
+          Service apply.
         </p>
       </div>
     </div>
