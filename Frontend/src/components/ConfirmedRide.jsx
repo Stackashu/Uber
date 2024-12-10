@@ -19,7 +19,7 @@ const ConfirmedRide = (props) => {
                 <h4 className=' text-gray-500 text-sm'>  roshan nagar , faridabad , haryana</h4>
                 
             </div >
-            
+
         </div>
         
         <div className=' flex w-full items-center p-4 gap-6   border-b-2 border-gray-100'>
@@ -43,7 +43,7 @@ const ConfirmedRide = (props) => {
        <div onClick={()=>{
         props.setConfirmRidePanel(false)
         props.setVehicleFound(true)
-       }} className=' w-full bg-emerald-500 text-black py-2 font-semibold mt-10  flex items-center justify-center text-lg'>Confirm </div>
+       }} className=' w-full bg-emerald-500 text-black py-2 font-semibold mt-10   flex items-center justify-center text-lg'>Confirm </div>
     </div>
   )
 }

@@ -74,7 +74,7 @@ const CaptainLogin = () => {
           </button>
           <p className="text-center">
             Join the fleet?
-            <Link to="/catpain-signup" className="text-blue-600">
+            <Link to="//captain-signup" className="text-blue-600">
               Register yourself
             </Link>
           </p>
